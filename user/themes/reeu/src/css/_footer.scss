@@ -1,0 +1,48 @@
+
+footer {
+    background-color: $footer-color;
+    min-height: 180px;
+    padding: 20px;
+    padding-top: 70px;
+    color: $footer-text-color;
+}
+
+footer .footer-container {
+}
+
+
+footer .footer-container .footer-logo {
+    img {
+        max-height: 50px;
+    }
+    margin-bottom: 1rem;
+}
+
+
+footer .footer-container .footer-social-links {
+
+    .btn-circle  {
+        background-color: $primary-color; 
+        color: $text-color-inverse;
+
+        width: 50px;
+        height: 50px;
+        line-height: 43px;
+        font-size: 1rem;
+
+        &:hover, &:focus {
+            background-color: darken($primary-color, 15%);
+            color: $text-color-inverse;
+        }
+        &:active {
+            background-color: lighten($primary-color, 20%);
+            color: $text-color-inverse;
+            border: none;
+            box-shadow: none;
+        }
+    }
+}
+
+footer .footer-container .footer-copyright-notice {
+    margin-top: 1rem;
+}

@@ -1,0 +1,77 @@
+{{ page.content }}
+
+<div class="team-members">
+
+  {# Desktop slider #}
+  <div class="team-slider team-slider-desktop">
+    <div class="controls">
+        <button class="btn btn-primary btn-circle btn-cta prev"><i class="icon-chevron-left"></i></button>
+        <button class="btn btn-primary btn-circle btn-cta next"><i class="icon-chevron-right"></i></button>
+    </div>
+    {% for batch in page.children|batch(3) %}
+        <div class="team-batch column-row">
+        {% for member in batch %}
+            <div class="team-card column-1-3">
+              <div class="team-card-image">
+                {% set photo = (member.media.images|first).cropResize(500, 500) %}
+                <img src="{{  photo.url }}" class="img-responsive">
+              </div>
+              <div class="team-card-body">
+                <div class="team-card-title">{{ member.header.nom }}</div>
+                <div class="card-subtitle text-gray">{{ member.header.poste }}.</div>
+              </div>
+            </div>
+        {% endfor %}
+        </div>
+    {% endfor %}
+  </div>
+
+  {# Mobile slider #}
+  <div class="team-slider team-slider-mobile">
+    <div class="controls">
+        <button class="btn btn-primary btn-circle btn-cta prev"><i class="icon-chevron-left"></i></button>
+        <button class="btn btn-primary btn-circle btn-cta next"><i class="icon-chevron-right"></i></button>
+    </div>
+    {% for batch in page.children|batch(2) %}
+        <div class="team-batch column-row">
+        {% for member in batch %}
+            <div class="team-card column-1-3">
+              <div class="team-card-image">
+                {% set photo = (member.media.images|first).cropResize(500, 500) %}
+                <img src="{{  photo.url }}" class="img-responsive">
+              </div>
+              <div class="team-card-body">
+                <div class="team-card-title">{{ member.header.nom }}</div>
+                <div class="card-subtitle text-gray">{{ member.header.poste }}.</div>
+              </div>
+            </div>
+        {% endfor %}
+        </div>
+    {% endfor %}
+  </div>
+
+  <div class="team-slider team-slider-mobile-xs">
+    <div class="controls">
+        <button class="btn btn-primary btn-circle btn-cta prev"><i class="icon-chevron-left"></i></button>
+        <button class="btn btn-primary btn-circle btn-cta next"><i class="icon-chevron-right"></i></button>
+    </div>
+    {% for batch in page.children|batch(1) %}
+        <div class="team-batch column-row">
+        {% for member in batch %}
+            <div class="team-card column-1-3">
+              <div class="team-card-image">
+                {% set photo = (member.media.images|first).cropResize(500, 500) %}
+                <img src="{{  photo.url }}" class="img-responsive">
+              </div>
+              <div class="team-card-body">
+                <div class="team-card-title">{{ member.header.nom }}</div>
+                <div class="card-subtitle text-gray">{{ member.header.poste }}.</div>
+              </div>
+            </div>
+        {% endfor %}
+        </div>
+    {% endfor %}
+  </div>
+
+
+</div>

@@ -1,0 +1,331 @@
+// Auto generate grid classes
+@for $i from 1 through $nb-columns {
+    @for $j from $i to $nb-columns + 1 {
+
+        // Generate columns of the form column-1-2
+        .#{$column-class-name}-#{$i}-#{$j} {
+            @include column($i, $j);
+        }
+
+        // Generate fluid columns of the form column-fluid-1-2
+        .#{$column-class-name}-fluid-#{$i}-#{$j} {
+            @include column($i, $j, $fluid: true);
+        }
+
+        // Generate push columns of the form column-push-1-2
+        .#{$column-class-name}-push-#{$i}-#{$j} {
+            @include column($i, $j, $pushPull: push);
+        }
+
+        // Generate pull columns of the form column-pull-1-2
+        .#{$column-class-name}-pull-#{$i}-#{$j} {
+            @include column($i, $j, $pushPull: pull);
+        }
+    }
+}
+
+
+/* Container for the whole page */
+.page-container {
+    position: relative;
+    text-align: center;
+    .btn{
+        margin-right: 10px;
+    }
+}
+
+.hero-section {
+    background: #ecf0f1;
+    //min-height: 800px;
+    min-height: 100vh; // TODO max(800px, 100vh) for screens smaller than 800px
+
+    height: auto;
+    position: relative;
+
+    background: url("../images/hero_overlay.jpg") no-repeat right;
+    background-size: cover;
+}
+
+/* Overlay */
+.hero-section:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    content: '';
+
+    // Use 3D so the image is hardware accelerated
+    transform: translate3d(0,0,1px);
+    opacity: 0.42;
+
+    background-color: #1e1e1e;
+    background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23313131' fill-opacity='1' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+.hero-section-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 80%;
+    height: 30%;
+    margin: auto;
+}
+
+.hero-text {
+    color: $text-color-inverse;
+
+    h1,h2,h3,h4,h5,h6 {
+        color: darken($text-color-inverse, 10%);
+    }
+
+    text-align: center;
+    p {
+        font-size: 0.90rem;
+    }
+}
+
+
+.primary-section {
+    @extend %page-section;
+
+    .primary-section-container{
+        @extend %page-section-container;
+    }
+}
+
+.secondary-section {
+    @extend %page-section;
+    
+    background-color: darken(#FFF, 5%);
+
+    .secondary-section-container{
+        @extend %page-section-container;
+    }
+}
+
+
+
+// Team
+.team-slider {
+    position: relative;
+    width: 100%;
+    white-space: nowrap;
+    overflow-x: hidden;
+    height: 500px;
+    //border: 1px solid blue;
+}
+
+.team-slider .team-card {
+    @include card(1);
+    //border: 1px solid green;
+
+    position: relative;
+    
+    display: inline-block;
+    vertical-align: top;
+
+    max-width: 250px;
+    min-width: 225px;
+
+    height: 400px;
+    min-height: 400px;
+
+    white-space: normal;
+
+    margin: 0.5rem 0.5rem;
+
+    text-align: left;
+}
+
+.team-card .team-card-body {
+    padding: 1rem;
+}
+
+.team-card .team-card-title {
+    font-weight: 900;
+}
+
+.team-card .team-card-image {
+
+}
+
+.team-slider .column-row {
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+
+.team-slider .column-row.team-batch {
+    opacity: 0;
+    animation: slide-out 0.3s ease-in-out;
+}
+
+.team-slider .column-row.team-batch.active {
+    opacity: 1;
+    animation: slide-in 0.3s ease-in-out;
+}
+
+@keyframes slide-in {
+    from {
+        opacity: 1;
+        transform: translateX(600px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slide-out {
+    to {
+        opacity: 0;
+        transform: translateX(600px);
+    }
+
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+.controls {
+    z-index: 3;
+    position: absolute;
+    top: 40%;
+    width: 100%;
+}
+
+.controls .next {
+    float: right;
+    @include card(1);
+}
+
+.controls .prev {
+    float: left;
+    @include card(1);
+}
+
+
+.controls button {
+    width: 50px !important;
+    height: 50px !important;
+    line-height: 50%;
+    margin: 0 !important;
+}
+.sponsors .column-row {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.sponsor {
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.sponsor img {
+    margin: auto;
+    margin-bottom: 1rem;
+}
+
+.card-image img{
+    width: 100%;
+}
+
+.events .event {
+    margin: auto;
+    max-width: 650px; 
+}
+
+.image-section {
+    /* Set a specific height */
+    height: 500px; 
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.core-value {
+    @include card(1);
+    padding: 1rem;
+    text-align: center;
+    background-color: #FFF;
+    height: 200px;
+    margin-bottom: 1rem;
+}
+
+
+.team-slider-desktop {
+    display: block;
+}
+
+.team-slider-mobile {
+    display: none;
+}
+
+.team-slider-mobile-xs {
+    display: none;
+}
+
+@media screen and (max-width: $size-md) {
+
+    .team-slider-desktop {
+        display: none;
+    }
+
+    .team-slider-mobile {
+        display: block;
+    }
+
+    .team-slider-mobile-xs {
+        display: none;
+    }
+}
+
+@media screen and (max-width: $size-sm) {
+
+    .team-slider-desktop {
+        display: none;
+    }
+
+    .team-slider-mobile {
+        display: none;
+    }
+
+    .team-slider-mobile-xs {
+        display: block;
+    }
+}
+
+@media screen and (max-width: $size-xs) {
+
+    .team-slider-desktop {
+        display: none;
+    }
+
+    .team-slider-mobile {
+        display: none;
+    }
+
+    .team-slider-mobile-xs {
+        display: block;
+    }
+}
+
+
+.contact-form {
+    margin: auto;
+    width: 700px;
+}
+

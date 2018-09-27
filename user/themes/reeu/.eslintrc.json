@@ -1,0 +1,17 @@
+{
+    "extends": "airbnb",
+    "plugins": [
+        "compat",
+        "vue"
+    ],
+    "env": {
+      "browser": true
+    },
+    "rules": {
+        "semi": [2, "never"],
+        "no-unexpected-multiline": 2,
+        "indent": ["error", 4],
+        "no-console": "off",
+        "quotes": "off"
+    }
+}

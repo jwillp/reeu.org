@@ -1,0 +1,89 @@
+.btn {
+    border-width: 0px;
+    border-radius: 100px;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+}
+
+.btn-link {
+    border-radius: 0px;
+}
+
+
+.btn-primary {
+    &:hover, &:focus {
+        background-color: $primary-color-light !important;
+        color: #FFFFFF;
+    }
+
+    &:active {
+        background-color: $primary-color-dark !important;
+    }
+}
+
+.btn-secondary {
+    background-color: $secondary-color;
+    color: #FFFFFF;
+
+    &:hover, &:focus {
+        background-color: $secondary-color-light;
+        color: #FFFFFF;
+    }
+    &:active {
+        background-color: $secondary-color-dark;
+    }
+}
+
+.btn-cta {
+    @extend .btn-lg;
+    //text-transform: uppercase;
+    font-weight: 500;
+    font-family: $title-font-family;
+    font-size: 0.95rem !important;
+}
+
+.btn-circle {
+    @extend .btn;
+
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+
+    @extend .btn-action;
+    @extend .circle;
+}
+
+
+.scroll-up-button {
+    @extend .btn-circle;
+    @extend .btn-secondary;
+
+    position: fixed;
+    bottom: 15%;
+    right: 5%;
+
+    width: 50px;
+    height: 50px;
+    line-height: 35px;
+
+    font-size: $font-size-lg;
+    //opacity: 0;
+
+    z-Index: 50;
+}
+
+.btn:focus, .btn-circle:focus, .scroll-up-button:focus {
+    box-shadow: none;
+}
+
+@media screen and (max-width: $size-md) {
+
+    // CTA Buttons must be bigger for easier touch on mobile
+    .btn-cta {
+        width: 100%;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        padding: 0px !important;
+        line-height: 70px;
+        height: 70px !important;
+    }
+}

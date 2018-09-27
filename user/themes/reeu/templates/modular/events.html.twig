@@ -1,0 +1,25 @@
+{{ page.content }}
+
+<div class="events">
+{% for event in page.children %}
+   <div class="event card">
+        <div class="card-image">
+            {% set image = event.media.images|first.cropResize(700) %}
+            <img src="{{ image.url }}" class="img-responsive">
+        </div>
+        <div class="card-body">
+
+            <h3>{{ event.header.titre }}</h3>
+            <p>{{ event.content }}</p>
+            <p>
+               <a href="{{ event.header.lien_facebook }}" target="_blank" class="btn-primary btn-circle">
+                   <i class="icon-facebook"></i>
+               </a>
+               <a class="btn btn-primary" href="{{ event.header.lien_achat_billet }}">
+                   Achat billet
+               </a>
+            </p>
+        </div>
+   </div>
+{% endfor %}
+</div>

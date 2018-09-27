@@ -1,0 +1,6 @@
+{% for section in page.collection() if not section.header.disabled %}
+    {% if not section.header.hidden_navigation %}
+        <a href="#{{ section.header.section_id|default(section.header.title|lower) }}" 
+           class="navigation-link btn btn-link">{{ section.header.title }}</a>
+    {% endif %}
+{% endfor %}

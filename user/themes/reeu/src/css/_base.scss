@@ -1,0 +1,87 @@
+html {
+
+}
+
+body {
+    background-color: #FFFFFF;
+    color: $text-color;
+    height: 100%;
+}
+
+html, body {
+    overflow-x: hidden;
+    position: relative;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-font-smoothing: antialiased;
+    -o-font-smoothing: antialiased;
+}
+
+*:focus {
+    outline: none;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: $title-font-family;
+    font-weight: 900;
+    color: $title-color;
+    text-transform: uppercase;
+}
+
+h1 {
+    font-size: 2.23rem;
+}
+
+h2 {
+    font-size: 1.8rem;
+}
+
+h3 {
+    font-size: 1.6rem;
+}
+
+img[src$=".svg"]{
+    position: relative;
+    /* fix for IE */
+    width: 100%;
+}
+
+.img-fluid {
+    // Part 1: Set a maximum relative to the parent
+     max-width: 100%;
+     // Part 2: Override the height to auto, otherwise images will be stretched
+     // when setting a width and height attribute on the img element.
+     height: auto;
+}
+
+/* fix for IE */
+object {
+    width: 100%;
+}
+
+table {
+    @extend .table;
+    @extend .table-striped;
+    border: 1px solid darken(#F0F1F4, 10%);
+    margin-bottom: 8px;
+}
+
+ul {
+    list-style: disc;
+}
+ul li {
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+}
+
+
+@media screen and (max-width: $size-md)  {
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.7rem;
+    }
+}

@@ -1,0 +1,20 @@
+input, textarea {
+    width: 100%;
+    padding: 12px 20px;
+    //margin: 8px 0;
+    border: none;
+    transition: background-color 0.2s ease-out;
+    &:focus {
+        border: 1px solid $primary-color;
+        background-color: lighten(#F0F1F4, 3%) !important;
+    }
+}
+
+input {
+    border-radius: 100px;
+}
+
+textarea {
+    border-radius: 20px;
+    //min-height: 175px;
+}

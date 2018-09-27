@@ -1,0 +1,17 @@
+{% extends 'partials/base.html.twig' %}
+
+{% block content %}
+    {% for section in page.collection if not section.header.disabled %}
+
+        {% if section.header.section_class_name == 'image' %}
+            {{ section.content }}
+        {% else %}
+        <section id="{{ section.header.section_id|default(section.header.title|lower) }}"
+        class="{{ section.header.section_class_name|default('primary') }}-section">
+            <div class="{{ section.header.section_class_name|default('primary') }}-section-container">
+                {{ section.content }}
+            </div> {# .[section-name]-section-container #}
+        </section> {# .[section-name]-section #}
+        {% endif %}
+    {% endfor %}
+{% endblock content %}

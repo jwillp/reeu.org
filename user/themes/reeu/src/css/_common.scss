@@ -1,0 +1,144 @@
+@import "variables";
+@import "mixins";
+
+
+%container {
+    max-width: $max-page-width;
+    margin: auto;
+}
+
+%page-section {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    min-height: 450px;
+}
+
+%page-section-container {
+    @extend %container;
+    padding: 1rem;
+    text-align: left;
+}
+
+%light-section-background {
+   background-color: #FFF;
+}
+
+%light-gray-section-background {
+   background-color: darken(#FFF, 20%);
+}
+
+
+// GRID //
+// http://thesassway.com/intermediate/simple-grid-mixins
+
+@mixin column-row() {
+    position: relative;
+    font-size: 0px;
+}
+
+// usage: @include column(1,3) --> 1/3
+// first indicates if the element is the first in a row
+// last indicates if the element is the last in a row
+// fluid: indicates if the col should not fill parent on smaller devices
+@mixin column($col, $sum, $gap: 1rem, $align: top, $fluid: false, $pushPull: none) {
+    display: inline-block;
+    vertical-align: $align;
+    font-size: $font-size;
+    padding: 0 $gap;
+
+
+    $computedWidth : if($fluid, percentage($col/$sum), 100%);
+    // handling responsize size
+    width: $computedWidth;
+
+    @if $computedWidth != 100% {
+        // If not full width add padding depending on first or last of column row
+        &:first-child{
+          padding-left: 0;
+        }
+
+        &:last-child{
+          padding-right: 0;
+        }
+    }
+
+
+
+    // on bigger devices they will be their col size
+    @media only screen and (min-width: $size-md) {
+       $computedWidth: percentage($col/$sum);
+       width: $computedWidth;
+       vertical-align: $align;
+
+       @if $computedWidth != 100% {
+           // Push pull is only applied on larger devices
+           // Therefore html code should be written in the order columns
+           // should be displayed on mobile (mobile-first)
+           // and be applied pushed or pulled on larger screens
+
+           @if $pushPull == push {
+               position: relative;
+               left: 100% - $computedWidth;
+
+           } @else if $pushPull == pull {
+               position: relative;
+               right: 100% -  $computedWidth;
+           } @else {
+                // If not full width add padding depending on first or last of column row
+                &:first-child{
+                  padding-left: 0;
+                }
+
+                &:last-child{
+                  padding-right: 0;
+                }
+           }
+       }
+    }
+}
+
+
+
+
+// As placholder columns to reduce bloat
+%column-row {
+    @include column-row();
+}
+
+$column-class-name: column !default;
+$nb-columns: 12 !default;
+
+// Auto generate placeholders for columns
+@for $i from 1 through $nb-columns {
+    @for $j from $i to $nb-columns + 1 {
+
+        // Generate columns of the form column-1-2
+        %#{$column-class-name}-#{$i}-#{$j} {
+            @include column($i, $j);
+        }
+
+        // Generate fluid columns of the form column-fluid-1-2
+        %#{$column-class-name}-fluid-#{$i}-#{$j} {
+            @include column($i, $j, $fluid: true);
+        }
+
+        // Generate push columns of the form column-push-1-2
+        %#{$column-class-name}-push-#{$i}-#{$j} {
+            @include column($i, $j, $pushPull: push);
+        }
+
+        // Generate pull columns of the form column-pull-1-2
+        %#{$column-class-name}-pull-#{$i}-#{$j} {
+            @include column($i, $j, $pushPull: pull);
+        }
+    }
+}
+
+// Add a few classes for use on above the fold critical path
+.column-row {
+  @include column-row();
+}
+
+.column-1-2 {
+  @include column(1, 2);
+}
